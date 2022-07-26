@@ -1,38 +1,130 @@
-.App {
-  text-align: center;
+a {
+    text-decoration: none;
+    color: aliceblue;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Header {
+    width: 100%;
+    height: 5vh;
+    background: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Navbar a:not(:last-child) {
+    margin-right: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.Content {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.Registrtion, .Login {
+    padding: 0px 100px;
+    border: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Authorization {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.Authorization input {
+    outline: none;
+    border: 1px solid gray;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+}
+
+.Authorization input:hover {
+    outline: none;
+}
+
+.Authorization button {
+    outline: none;
+    border: 1px solid gray;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+    background: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.Profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Profile button {
+    background: #ff3535;
+    border: none;
+    padding: 10px 25px;
+    font-size: 26px;
+    color: white;
+    border-radius: 5px;
+}
+
+.Select {
+    border: none;
+    padding: 10px 20px;
+    background: #c7c7c7;
+    border-radius: 5px;
+    outline: none;
+    margin-bottom: 50px;
+}
+
+.Select option {
+    background: #ffffff;
+    border-radius: 0px;
+}
+
+.redirect {
+    color: black;
+}
+
+.Game {
+    text-transform: uppercase;
+    color: #6e6e6e;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Game > div  {
+    margin-bottom: 15px;
+}
+
+
+.Black {
+    text-transform: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: #3b3b3b;
+}
+
+.Option {
+    border: 1px solid gray;
+    border-radius: 4px;
+    background: #ffffff;
+    padding: 10px 20px;
+    color: #6e6e6e;
+    font-weight: bold;
+}
+
+.Option:not(:last-child) {
+    margin-right: 20px;
+}
+
+.back {
+    padding: 15px 25px;
 }
