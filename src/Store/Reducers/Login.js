@@ -1,8 +1,10 @@
+import {getLoginStorage} from "../../LocalStorage/Localstorage";
+
 const defaultState = {
-    email: "",
-    password: "",
-    access_token: "",
-    auth: false,
+    email: getLoginStorage()?.email,
+    password: getLoginStorage()?.password,
+    access_token: getLoginStorage()?.access_token,
+    isAuth: getLoginStorage()?.isAuth,
 }
 
 export const Login = (state = defaultState, action) => {
@@ -13,7 +15,7 @@ export const Login = (state = defaultState, action) => {
                 email: action.email,
                 password: action.password,
                 access_token: action.access_token,
-                auth: action.auth
+                isAuth: action.isAuth
             }
         default:
             return state

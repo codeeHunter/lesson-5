@@ -1,6 +1,15 @@
 a {
     text-decoration: none;
     color: aliceblue;
+    transition: .5s ease;
+}
+
+a.active {
+    color: black;
+}
+
+button {
+    cursor: pointer;
 }
 
 .Header {
@@ -17,7 +26,7 @@ a {
 }
 
 .Content {
-    height: 80vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,13 +67,17 @@ a {
     margin-bottom: 20px;
 }
 
-.Profile {
+.Start {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.Profile button {
+.Profile_info {
+    padding-bottom: 20px;
+}
+
+.Start button {
     background: #ff3535;
     border: none;
     padding: 10px 25px;
@@ -73,18 +86,26 @@ a {
     border-radius: 5px;
 }
 
+option {
+    border-radius: 0;
+}
+
 .Select {
     border: none;
     padding: 10px 20px;
     background: #c7c7c7;
-    border-radius: 5px;
+    border-radius: 2px;
     outline: none;
     margin-bottom: 50px;
 }
 
-.Select option {
+.Select > option {
     background: #ffffff;
-    border-radius: 0px;
+    border: none;
+}
+
+.Select.active {
+    border: 1px solid #ff3535;
 }
 
 .redirect {
@@ -100,7 +121,7 @@ a {
     align-items: center;
 }
 
-.Game > div  {
+.Game > div {
     margin-bottom: 15px;
 }
 
@@ -127,4 +148,44 @@ a {
 
 .back {
     padding: 15px 25px;
+}
+
+.Result {
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 30px;
+
+}
+
+.Result > span {
+    display: inline;
+    margin-left: 44px;
+    text-transform: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.Field {
+    border-top: 1px solid #8c8c8c;
+    border-bottom: 1px solid #8c8c8c;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0px;
+    text-transform: none;
+}
+
+.Field:hover {
+    background: #e3e3e3;
+} 
+
+
+.Question-child {
+    padding-left: 10px;
+}
+
+
+
+.Current_answer {
+    margin-right: 20px;
 }

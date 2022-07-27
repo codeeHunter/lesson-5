@@ -3,6 +3,7 @@ const defaultState = {
     options: [],
     points: 0,
     time: 0,
+    questions: [],
 }
 
 export const Game = (state = defaultState, action) => {
@@ -13,7 +14,8 @@ export const Game = (state = defaultState, action) => {
                 question: action.question,
                 options: action.options,
                 points: action.points,
-                time: action.time
+                time: action.time,
+                questions: action.questions,
             }
         default:
             return state

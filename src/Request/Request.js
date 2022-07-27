@@ -1,5 +1,9 @@
 import axios from "axios";
-import {getLocalStorage, saveLocalStorage} from "../LocalStorage/Localstorage";
+import {
+    getLoginStorage,
+    saveLoginLocalStorage,
+    saveRegistrationLocalStorage
+} from "../LocalStorage/Localstorage";
 
 
 export const Registration_request = async (name, email, password, password_confirmation) => {
@@ -8,7 +12,8 @@ export const Registration_request = async (name, email, password, password_confi
     })
         .then(response => {
             if (response.data.status) {
-                saveLocalStorage(name, email, password, password_confirmation)
+                saveRegistrationLocalStorage(name, email, password, password_confirmation)
+                return response.data
             }
         })
 }
@@ -17,22 +22,38 @@ export const Registration_request = async (name, email, password, password_confi
 export const Auth_request = async (email, password) => {
     return await axios.post("https://internsapi.public.osora.ru/api/auth/login",
         {
-            password: password, email: email,
+            email: email, password: password,
         })
         .then(response => {
             if (response.data.status) {
-                saveLocalStorage(email, password, response.data.data.access_token)
+                saveLoginLocalStorage(email, password, response.data.data.access_token, response.data.status)
+                return response.data
             } else {
-                console.error(response)
+                console.log(response)
             }
         })
 }
 
 export const Play = async (type_hard) => {
-    axios.defaults.headers.common = {'Authorization': `Bearer ${getLocalStorage().access_token}`}
+    axios.defaults.headers.common = {'Authorization': `Bearer ${getLoginStorage().access_token}`}
     return await axios.post("https://internsapi.public.osora.ru/api/game/play",
         {
             type_hard: type_hard, type: 1
+        })
+        .then(response => {
+            if (response.data.status) {
+                return response.data
+            } else {
+                console.log(response)
+            }
+        })
+}
+
+export const Answer = async (answer, type_hard) => {
+    axios.defaults.headers.common = {'Authorization': `Bearer ${getLoginStorage().access_token}`}
+    return await axios.post("https://internsapi.public.osora.ru/api/game/play",
+        {
+            answer: answer, type_hard: type_hard, type: 2
         })
         .then(response => {
             if (response.data.status) {

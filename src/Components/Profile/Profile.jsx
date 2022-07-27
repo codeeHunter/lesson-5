@@ -1,33 +1,36 @@
 import React, {useState} from 'react';
-import {Play} from "../../Request/Request";
-import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
-
+import {useDispatch, useSelector} from "react-redux";
 
 const Profile = () => {
-    const [value, setValue] = useState(1);
-    const game = useNavigate()
-    const dispatch = useDispatch();
-
-    const play = () => {
-        Play(value).then(response => {
-            if (response.status) {
-                let res = response.data;
-                dispatch({type: "Game", question: res.question, options: res.options, points: res.points, time: res.time})
-                game("/game")
-            }
-        })
-    }
+    const selector = useSelector(state => state.Game)
 
     return (
-        <div className={"Profile"}>
-            <select className={"Select"} name="" id="">
-                <option disabled={"disabled"} value>Выберите сложность</option>
-                <option onFocus={() => setValue(1)} value="1">Easy/Легко</option>
-                <option onFocus={() => setValue(2)} value="2">Hard/Тяжело</option>
-            </select>
-            <button onClick={play}>Start</button>
-        </div>
+        <>
+            {selector?.questions &&
+                <div className={"Game"}>
+                    <div className="">
+                        <div className="Score">
+                            <span>Score: <span className={"Black"}>{selector.points}</span></span>
+                        </div>
+                        <div className="Timer">
+                            <div>Timer: <span className="Black">0</span></div>
+                        </div>
+                        <span>End game</span>
+                    </div>
+                    <div className={"Result"}>
+                        <span>Question</span><span>Anwser</span><span>Correct</span>
+                        {selector.questions.map((i) => {
+                            return <div key={i.id} className={"Field"}>
+                                <span className={"Question-child"}>{i.question}</span>
+                                <span className={"Answer-child"}>{i.answer}</span>
+                                <span className={"Current_answer"}>{i.current_answer}</span>
+                            </div>
+                        })}
+                    </div>
+                </div>
+
+            }
+        </>
     );
 };
 

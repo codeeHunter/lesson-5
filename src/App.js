@@ -3,8 +3,8 @@ import Navbar from "./Components/Navbar/Navbar";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "./Components/Login/Login";
 import Registration from "./Components/Registration/Registration";
+import Game from "./Components/Game/Game";
 import Profile from "./Components/Profile/Profile";
-import Game from "./Game/Game";
 
 function App() {
     return (
@@ -17,8 +17,8 @@ function App() {
                     <Routes>
                         <Route path={"/"} element={<Registration />}/>
                         <Route path={"/login"} element={<Login />}/>
-                        <Route path={"/profile"} element={<Profile />}/>
                         <Route path={"/game"} element={<Game />}/>
+                        <Route path={"/profile"} element={<Profile />}/>
                     </Routes>
                 </div>
             </div>

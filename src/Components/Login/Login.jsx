@@ -1,39 +1,47 @@
 import React, {useState} from 'react';
 import {Auth_request} from "../../Request/Request";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
+import {getLoginStorage} from "../../LocalStorage/Localstorage";
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch();
-    const auth = useSelector(state => state.Login.auth);
-    const profile = useNavigate()
+    const isAuth = useSelector(state => state.Login.isAuth);
 
 
     const login = () => {
-        Auth_request(email, password, '')
-        dispatch({type: "Login", email: email, password: password, access_token: "", auth: true})
+        Auth_request(email, password, '').then(response => {
+            if (response?.status) {
+                dispatch({
+                    type: "Login",
+                    email: getLoginStorage().email,
+                    password: getLoginStorage().password,
+                    access_token: getLoginStorage().access_token,
+                    isAuth: getLoginStorage().isAuth
+                })
+            } else {
+                alert("Возникла какая-то ошибка")
+            }
+        })
     }
 
-    const ap = () => {
-        profile("/profile")
+    if (isAuth) {
+        alert("Вы авторизованы...")
+        return <Navigate to={"/profile"}/>
     }
-
 
     return (
-        <>
-            {!auth ?
-                <div className={"Login"}>
-                    <h1>Логин</h1>
-                    <div className={"Authorization"}>
-                        <input onChange={(e) => setEmail(e.target.value)} type="email" placeholder={"Email"}/>
-                        <input onChange={(e) => setPassword(e.target.value)} type="password" placeholder={"Password"}/>
-                        <button onClick={login}>Авторизоваться</button>
-                    </div>
-                </div> : ap()
-            }
-        </>
+        <div className={"Login"}>
+            <h1>Логин</h1>
+            <div className={"Authorization"}>
+                <input onChange={(e) => setEmail(e.target.value)} type="email" placeholder={"Email"}/>
+                <input onChange={(e) => setPassword(e.target.value)} type="password"
+                       placeholder={"Password"}/>
+                <button onClick={login}>Авторизоваться</button>
+            </div>
+        </div>
     );
 };
 

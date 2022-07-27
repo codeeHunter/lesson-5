@@ -1,5 +1,4 @@
-
-export const saveLocalStorage = (name, email, password, password_confirmation) => {
+export const saveRegistrationLocalStorage = (name, email, password, password_confirmation) => {
     const registration = {
         name: name,
         email: email,
@@ -7,21 +6,28 @@ export const saveLocalStorage = (name, email, password, password_confirmation) =
         password_confirmation: password_confirmation
     }
 
-    const login = {
-        email: name,
-        password: email,
-        access_token: password,
-    }
+    localStorage.setItem("registration", JSON.stringify(registration))
 
-    if(registration.password_confirmation != null && registration.name != null) {
-        localStorage.setItem("registration", JSON.stringify(registration))
-    } else {
-        localStorage.setItem("login", JSON.stringify(login))
-    }
 }
 
-export const getLocalStorage = () => {
+export const saveLoginLocalStorage = (email, password, token, isAuth) => {
+    const login = {
+        email: email,
+        password: password,
+        access_token: token,
+        isAuth: isAuth,
+    }
+    localStorage.setItem("login", JSON.stringify(login))
+}
+
+export const getLoginStorage = () => {
     return localStorage.getItem("login")
         ? JSON.parse(localStorage.getItem("login"))
+        : [];
+}
+
+export const getRegistrationStorage = () => {
+    return localStorage.getItem("registration")
+        ? JSON.parse(localStorage.getItem("registration"))
         : [];
 }

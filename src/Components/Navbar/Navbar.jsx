@@ -8,8 +8,8 @@ const Navbar = () => {
         <div className={"Navbar"}>
             <NavLink to={"/"}>Регистрация</NavLink>
             <NavLink to={"login"}>Логин</NavLink>
-            <NavLink to={"profile"}>Профиль</NavLink>
             <NavLink to={"game"}>Игра</NavLink>
+            <NavLink to={"profile"}>Профиль</NavLink>
         </div>
     );
 };
