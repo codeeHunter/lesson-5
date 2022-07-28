@@ -14,6 +14,7 @@ const Profile = () => {
 
     useEffect(() => {
         if (!isAuth) {
+            alert("Вы не авторизованы!")
             navigate("/login")
         }
     }, [isAuth, navigate])
