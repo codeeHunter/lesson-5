@@ -23,7 +23,6 @@ const Game = () => {
     }, [isAuth, navigate])
 
     const play = () => {
-        setValue(1);
         Play(value).then(response => {
             if (response?.status) {
                 let res = response.data;
@@ -49,6 +48,7 @@ const Game = () => {
 
 
     const handleClick = (e) => {
+        setValue(1);
         Answer(e.target.value, value).then(response => {
             let res = response?.data;
             dispatch({
@@ -70,7 +70,7 @@ const Game = () => {
     useEffect(() => {
         if (count === 0 && isStart) {
             if (value === 1) {
-                Answer(1, value).then(response => {
+                Answer(1, 1).then(response => {
                     let res = response?.data;
                     dispatch({
                         type: "Game",
@@ -84,7 +84,7 @@ const Game = () => {
                     setCount(game.time);
                 })
             } else {
-                Answer("1", value).then(response => {
+                Answer("1", 2).then(response => {
                     let res = response?.data;
                     dispatch({
                         type: "Game",
@@ -104,7 +104,7 @@ const Game = () => {
 
     const sendAnswer = () => {
         if (answer.length === 0) {
-            Answer("1", value).then(response => {
+            Answer("1", 2).then(response => {
                 let res = response?.data;
                 dispatch({
                     type: "Game",
@@ -119,7 +119,7 @@ const Game = () => {
                 setAnswer("")
             })
         } else {
-            Answer(answer, value).then(response => {
+            Answer(answer, 2).then(response => {
                 let res = response?.data;
                 if (res !== undefined) {
                     dispatch({
@@ -144,6 +144,9 @@ const Game = () => {
         }
     }, [game.isEnd, navigate])
 
+    const changeValue = (event) => {
+        setValue(event)
+    }
 
     return (
         <div className={"Game"}>
@@ -151,7 +154,7 @@ const Game = () => {
             {
                 !isStart ?
                     <div className={"Start"}>
-                        <select name="" id="" className={"Select"} onChange={e => setValue(e.target.value)}>
+                        <select name="" id="" className={"Select"} onChange={e => changeValue(e.target.value)}>
                             <option disabled value="">Выберите сложность</option>
                             <option value="1">Easy/Легко</option>
                             <option value="2">Hard/Тяжело</option>
