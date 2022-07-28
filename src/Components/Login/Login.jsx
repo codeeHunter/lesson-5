@@ -10,7 +10,6 @@ const Login = () => {
     const dispatch = useDispatch();
     const isAuth = useSelector(state => state.Login.isAuth);
 
-
     const login = () => {
         Auth_request(email, password, '').then(response => {
             if (response?.status) {
@@ -28,8 +27,7 @@ const Login = () => {
     }
 
     if (isAuth) {
-        alert("Вы авторизованы...")
-        return <Navigate to={"/profile"}/>
+        return <Navigate to={"/game"}/>
     }
 
     return (

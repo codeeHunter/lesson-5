@@ -12,6 +12,7 @@ const Registration = () => {
     const [confirm_password, setConfirm_password] = useState('')
     const dispatch = useDispatch()
     const isName = useSelector(state => state.Registration.name)
+    const isAuth = useSelector(state => state.Login.isAuth);
 
 
     const request = () => {
@@ -29,23 +30,26 @@ const Registration = () => {
     }
 
     if (isName?.length > 0) {
-        alert("Вы зарегистрированы, авторизуйтесь...")
-        return <Navigate to={"/login"}/>
+        if (isAuth) {
+            return <Navigate to={"/game"}/>
+        } else {
+            return <Navigate to={"/login"}/>
+        }
     }
 
-        return (
-            <div className={"Registrtion"}>
-                <h1>Регистрация</h1>
-                <div className={"Authorization"}>
-                    <input onChange={(e) => setName(e.target.value)} type="text" placeholder={"Name"}/>
-                    <input onChange={(e) => setEmail(e.target.value)} type="email" placeholder={"Email"}/>
-                    <input onChange={(e) => setPassword(e.target.value)} type="password" placeholder={"Password"}/>
-                    <input onChange={(e) => setConfirm_password(e.target.value)} type="password"
-                           placeholder={"Confirm password"}/>
-                    <button onClick={request}>Зарегистрироваться</button>
-                </div>
+    return (
+        <div className={"Registrtion"}>
+            <h1>Регистрация</h1>
+            <div className={"Authorization"}>
+                <input onChange={(e) => setName(e.target.value)} type="text" placeholder={"Name"}/>
+                <input onChange={(e) => setEmail(e.target.value)} type="email" placeholder={"Email"}/>
+                <input onChange={(e) => setPassword(e.target.value)} type="password" placeholder={"Password"}/>
+                <input onChange={(e) => setConfirm_password(e.target.value)} type="password"
+                       placeholder={"Confirm password"}/>
+                <button onClick={request}>Зарегистрироваться</button>
             </div>
-        );
+        </div>
+    );
 };
 
 export default Registration;

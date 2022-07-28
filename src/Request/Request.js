@@ -14,6 +14,8 @@ export const Registration_request = async (name, email, password, password_confi
             if (response.data.status) {
                 saveRegistrationLocalStorage(name, email, password, password_confirmation)
                 return response.data
+            } else {
+                alert(response.data.errors)
             }
         })
 }
@@ -29,7 +31,7 @@ export const Auth_request = async (email, password) => {
                 saveLoginLocalStorage(email, password, response.data.data.access_token, response.data.status)
                 return response.data
             } else {
-                console.log(response)
+                alert(response.data.errors)
             }
         })
 }
@@ -44,7 +46,7 @@ export const Play = async (type_hard) => {
             if (response.data.status) {
                 return response.data
             } else {
-                console.log(response)
+                alert(response.data.errors)
             }
         })
 }
@@ -59,7 +61,7 @@ export const Answer = async (answer, type_hard) => {
             if (response.data.status) {
                 return response.data
             } else {
-                console.log(response)
+                alert(response.data.errors)
             }
         })
 }

@@ -1,3 +1,10 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 a {
     text-decoration: none;
     color: aliceblue;
@@ -5,11 +12,20 @@ a {
 }
 
 a.active {
-    color: black;
+    color: #a8a8a8;
+}
+
+a:hover {
+    color: #a8a8a8;
 }
 
 button {
     cursor: pointer;
+    transition: 1s ease;
+}
+
+button:hover {
+    background: #c2c2c2;
 }
 
 .Header {
@@ -26,7 +42,7 @@ button {
 }
 
 .Content {
-    height: 100vh;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,6 +83,7 @@ button {
     margin-bottom: 20px;
 }
 
+
 .Start {
     display: flex;
     flex-direction: column;
@@ -78,7 +95,7 @@ button {
 }
 
 .Start button {
-    background: #ff3535;
+    background: #c72222;
     border: none;
     padding: 10px 25px;
     font-size: 26px;
@@ -86,8 +103,13 @@ button {
     border-radius: 5px;
 }
 
+.Start button:hover {
+    background: #a61414;
+}
+
 option {
     border-radius: 0;
+    background: #ffffff;
 }
 
 .Select {
@@ -97,15 +119,7 @@ option {
     border-radius: 2px;
     outline: none;
     margin-bottom: 50px;
-}
-
-.Select > option {
-    background: #ffffff;
-    border: none;
-}
-
-.Select.active {
-    border: 1px solid #ff3535;
+    transition: .3s ease;
 }
 
 .redirect {
@@ -119,12 +133,34 @@ option {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: .5s ease;
+}
+
+.Game h1 {
+    text-transform: none;
+    margin-bottom: 45px;
 }
 
 .Game > div {
     margin-bottom: 15px;
 }
 
+.SetAnswer {
+    display: flex;
+    flex-direction: column;
+}
+
+.SetAnswer input {
+    margin-bottom: 10px;
+    outline: none;
+    padding: 3px 5px;
+    color: #606060;
+}
+
+.SetAnswer button {
+    padding: 10px 5px;
+    color: #606060;
+}
 
 .Black {
     text-transform: none;
@@ -151,41 +187,66 @@ option {
 }
 
 .Result {
-    width: 400px;
-    margin: 0 auto;
-    margin-top: 30px;
-
+    margin-top: 15px;
+}
+.Table {
+    width: 420px;
+    border-collapse: collapse;
+    text-transform: none;
 }
 
-.Result > span {
-    display: inline;
-    margin-left: 44px;
-    text-transform: none;
-    font-size: 20px;
-    font-weight: bold;
+.Table td {
+    padding: 5px;
+}
+
+.Table td {
+    border-top: 1px solid #dddddd;
+    padding: 7px 5px;
+}
+
+.Table tr:first-child {
+    margin-bottom: 20px;
+}
+
+.Table tr:last-child {
+    border-bottom: 1px solid #dddddd;
+}
+
+.Table tr td:first-child, .Table tr th:first-child {
+    border-left: none;
+}
+.Table tr td:last-child, .Table tr th:last-child {
+    border-right: none;
 }
 
 .Field {
-    border-top: 1px solid #8c8c8c;
-    border-bottom: 1px solid #8c8c8c;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0px;
-    text-transform: none;
+    background: #ffffff;
+    text-align: center;
 }
 
 .Field:hover {
     background: #e3e3e3;
-} 
+}
 
+.InfoScore, .Info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-.Question-child {
-    padding-left: 10px;
+.InfoScore h1, .InfoScore h2 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-transform: none;
+}
+
+.Info h1, .Info h2 {
+    margin-bottom: 0px;
+    text-transform: none;
+}
+
+.End {
+    font-weight: bold;
 }
 
 
-
-.Current_answer {
-    margin-right: 20px;
-}
