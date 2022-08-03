@@ -14,7 +14,7 @@ function App() {
   let LoggedIn = getAuthStorage().token;
 
   useEffect(() => {
-    if (LoggedIn.length > 0) {
+    if (LoggedIn?.length > 0) {
       return navigate("/game");
     }
   }, [LoggedIn]);
