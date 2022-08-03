@@ -1,12 +1,24 @@
 import "./App.css";
+import { useEffect } from "react";
 import Navbar from "./Components/Navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Login from "./Components/Login/Login";
 import Registration from "./Components/Registration/Registration";
 import Game from "./Components/Game/Game";
 import Profile from "./Components/Profile/Profile";
+import { useNavigate } from "react-router-dom";
+import { getAuthStorage } from "./LocalStorage/Localstorage";
 
 function App() {
+  let navigate = useNavigate();
+  let LoggedIn = getAuthStorage().token;
+
+  useEffect(() => {
+    if (LoggedIn.length > 0) {
+      return navigate("/game");
+    }
+  }, [LoggedIn]);
+
   return (
     <div className={"Main"}>
       <div className={"Header"}>

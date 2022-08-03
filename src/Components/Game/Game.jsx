@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const Game = () => {
   const game = useSelector((state) => state.Game);
-  const isAuth = useSelector((state) => state.Login.isAuth);
-  const user = useSelector((state) => state.Registration.name);
+  const isAuth = useSelector((state) => state.Login.access_token);
+
   const dispatch = useDispatch();
   let [count, setCount] = useState(game.time);
   const [isStart, setIsStart] = useState(false);
@@ -20,7 +20,7 @@ const Game = () => {
       alert("Вы не авторизованы!");
       navigate("/login");
     }
-  }, [isAuth, navigate]);
+  }, [isAuth]);
 
   const play = () => {
     Play(value).then((response) => {
@@ -145,7 +145,6 @@ const Game = () => {
 
   return (
     <div className={"Game"}>
-      <h1>Hello, {user?.length > 0 ? user : "user"}!</h1>
       {!isStart ? (
         <div className={"Start"}>
           <select

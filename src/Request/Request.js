@@ -1,8 +1,7 @@
 import axios from "axios";
 import {
-  getLoginStorage,
-  saveLoginLocalStorage,
-  saveRegistrationLocalStorage,
+  getAuthStorage,
+  saveAuthLocalStorage,
 } from "../LocalStorage/Localstorage";
 
 export const Registration_req = async (
@@ -20,15 +19,9 @@ export const Registration_req = async (
     })
     .then((response) => {
       if (response.data.status) {
-        saveRegistrationLocalStorage(
-          name,
-          email,
-          password,
-          password_confirmation
-        );
         return response.data;
       } else {
-        alert(response.data.errors);
+        return response.data;
       }
     });
 };
@@ -41,12 +34,7 @@ export const Auth = async (email, password) => {
     })
     .then((response) => {
       if (response.data.status) {
-        saveLoginLocalStorage(
-          email,
-          password,
-          response.data.data.access_token,
-          response.data.status
-        );
+        saveAuthLocalStorage(response.data.data.access_token);
         return response.data;
       } else {
         alert(response.data.errors);
@@ -56,7 +44,7 @@ export const Auth = async (email, password) => {
 
 export const Play = async (type_hard) => {
   axios.defaults.headers.common = {
-    Authorization: `Bearer ${getLoginStorage().access_token}`,
+    Authorization: `Bearer ${getAuthStorage().token}`,
   };
   return await axios
     .post("https://internsapi.public.osora.ru/api/game/play", {
@@ -74,7 +62,7 @@ export const Play = async (type_hard) => {
 
 export const Answer = async (answer, type_hard) => {
   axios.defaults.headers.common = {
-    Authorization: `Bearer ${getLoginStorage().access_token}`,
+    Authorization: `Bearer ${getAuthStorage().token}`,
   };
   return await axios
     .post("https://internsapi.public.osora.ru/api/game/play", {

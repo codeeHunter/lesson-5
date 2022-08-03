@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const game = useSelector((state) => state.Game);
-  const isAuth = useSelector((state) => state.Login.isAuth);
-  const user = useSelector((state) => state.Registration.name);
+  const isAuth = useSelector((state) => state.Login.access_token);
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -24,8 +23,6 @@ const Profile = () => {
       {game?.questions?.length > 0 ? (
         <div className={"Game"}>
           <div className="InfoScore">
-            <h1>User: {user}</h1>
-            <h2>Result's</h2>
             <div className="Score">
               <span>
                 Score: <span className={"Black"}>{game.points}</span>
@@ -70,7 +67,6 @@ const Profile = () => {
       ) : (
         <div className={"Game"}>
           <div className="Info">
-            <h1>User: {user}</h1>
             <h2>Вы еще не играли</h2>
           </div>
         </div>
